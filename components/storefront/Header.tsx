@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
-import { Search, ShoppingCart, MapPin, User, ChevronDown, Menu, X } from "lucide-react";
+import { Search, MapPin, User, ChevronDown, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { NAV_CATEGORIES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import CartIcon from "./CartIcon";
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -54,11 +54,7 @@ export default function Header() {
             <User size={18} />
             <span className="hidden lg:block">Sign In</span>
           </Link>
-          <Link href="/cart" className="relative flex items-center gap-1.5 text-sm text-gray-700 hover:text-[#3D52A0] px-2 py-1.5">
-            <ShoppingCart size={20} />
-            <span className="absolute -top-1 -right-1 bg-[#3D52A0] text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">0</span>
-            <span className="hidden lg:block">Cart</span>
-          </Link>
+          <CartIcon />
         </div>
       </div>
 
