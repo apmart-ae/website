@@ -2,13 +2,21 @@
 import Link from "next/link";
 import { Search, MapPin, User, ChevronDown, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { NAV_CATEGORIES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import CartIcon from "./CartIcon";
 
 export default function Header() {
+  const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [mobileQuery, setMobileQuery] = useState("");
+
+  const doSearch = (q: string) => {
+    const trimmed = q.trim();
+    if (trimmed) router.push(`/search?q=${encodeURIComponent(trimmed)}`);
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
@@ -36,9 +44,13 @@ export default function Header() {
               placeholder="What are you looking for?"
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
+              onKeyDown={e => e.key === "Enter" && doSearch(searchQuery)}
               className="flex-1 px-4 py-2 text-sm outline-none"
             />
-            <button className="bg-[#3D52A0] px-5 py-2 text-white hover:bg-[#7091E6] transition-colors">
+            <button
+              onClick={() => doSearch(searchQuery)}
+              className="bg-[#3D52A0] px-5 py-2 text-white hover:bg-[#7091E6] transition-colors"
+            >
               <Search size={18} />
             </button>
           </div>
@@ -64,9 +76,12 @@ export default function Header() {
           <input
             type="text"
             placeholder="What are you looking for?"
+            value={mobileQuery}
+            onChange={e => setMobileQuery(e.target.value)}
+            onKeyDown={e => e.key === "Enter" && doSearch(mobileQuery)}
             className="flex-1 px-3 py-2 text-sm outline-none"
           />
-          <button className="bg-[#3D52A0] px-4 py-2 text-white">
+          <button onClick={() => doSearch(mobileQuery)} className="bg-[#3D52A0] px-4 py-2 text-white">
             <Search size={16} />
           </button>
         </div>
