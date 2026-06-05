@@ -4,10 +4,10 @@ import { Heart, ShoppingCart, Trash2 } from "lucide-react";
 import Link from "next/link";
 
 const WISHLIST = [
-  { id: "1", slug: "apple-iphone-17-pro", title: "Apple iPhone 17 Pro 256GB Desert Titanium", price: 4999, compareAt: 5499, image: "", category: "Smartphones", inStock: true },
-  { id: "2", slug: "samsung-galaxy-s25-ultra", title: "Samsung Galaxy S25 Ultra 512GB Titanium Black", price: 4699, compareAt: 4999, image: "", category: "Smartphones", inStock: true },
-  { id: "3", slug: "macbook-pro-14-m4-pro", title: 'MacBook Pro 14" M4 Pro 512GB Space Black', price: 8499, compareAt: 0, image: "", category: "Laptops", inStock: false },
-  { id: "4", slug: "apple-watch-ultra-2", title: "Apple Watch Ultra 2 49mm Titanium", price: 3799, compareAt: 4199, image: "", category: "Wearables", inStock: true },
+  { id: "1", slug: "apple-iphone-17-pro", title: "Apple iPhone 17 Pro 256GB Desert Titanium", price: 4999, compareAt: 5499, image: "/products/iphone-17-pro.jpg", category: "Smartphones", inStock: true },
+  { id: "2", slug: "samsung-galaxy-s25-ultra", title: "Samsung Galaxy S25 Ultra 512GB Titanium Black", price: 4699, compareAt: 4999, image: "/products/samsung-s25-ultra.jpg", category: "Smartphones", inStock: true },
+  { id: "3", slug: "macbook-pro-14-m4-pro", title: 'MacBook Pro 14" M4 Pro 512GB Space Black', price: 8499, compareAt: 0, image: "/products/macbook-pro-14-m4.jpg", category: "Laptops", inStock: false },
+  { id: "4", slug: "apple-watch-ultra-2", title: "Apple Watch Ultra 2 49mm Titanium", price: 3799, compareAt: 4199, image: "/products/apple-watch-ultra-2.jpg", category: "Wearables", inStock: true },
 ];
 
 export default function AccountWishlistPage() {

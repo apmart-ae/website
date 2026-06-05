@@ -29,21 +29,6 @@ export const NAV_CATEGORIES = [
       { label: "Accessories", slug: "wearable-accessories" },
     ],
   },
-  { label: "TV & Audio", slug: "tv-audio", sub: [] },
-  {
-    label: "Appliances",
-    slug: "appliances",
-    sub: [
-      { label: "Home Appliances", slug: "home-appliances" },
-      { label: "Built-In", slug: "built-in-appliances" },
-      { label: "Kitchen", slug: "kitchen-appliances" },
-      { label: "Personal Care", slug: "personal-care-appliances" },
-      { label: "Air Fryer", slug: "air-fryer" },
-      { label: "Vacuum Cleaner", slug: "vacuum-cleaner" },
-      { label: "Air Purifier", slug: "air-purifier" },
-    ],
-  },
-  { label: "Personal Care", slug: "personal-care", sub: [] },
   {
     label: "Computing",
     slug: "computing",
@@ -64,7 +49,6 @@ export const NAV_CATEGORIES = [
   },
   { label: "Routers", slug: "routers", sub: [] },
   { label: "Gaming", slug: "gaming", sub: [] },
-  { label: "Photography", slug: "photography", sub: [] },
   {
     label: "Accessories",
     slug: "accessories",

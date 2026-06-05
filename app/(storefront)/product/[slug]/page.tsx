@@ -8,9 +8,9 @@ const DEMO_PRODUCT = {
   rating: 4.7,
   reviewCount: 284,
   images: [
-    "https://placehold.co/600x600/EDE8F5/3D52A0?text=Front",
-    "https://placehold.co/600x600/EDE8F5/3D52A0?text=Back",
-    "https://placehold.co/600x600/EDE8F5/3D52A0?text=Side",
+    "/products/samsung-s25-ultra.jpg",
+    "/products/samsung-s25.jpg",
+    "/products/samsung-s25-ultra.jpg",
   ],
   variants: [
     { id: "v1", sku: "S25U-256-GRAY",  storage: "256GB", color: "Titanium Gray",  priceAed: 3999, compareAtAed: 5099, stock: 24, weightKg: 0.218 },

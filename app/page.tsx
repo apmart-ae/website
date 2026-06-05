@@ -8,25 +8,25 @@ import ProductCard, { type ProductCardData } from "@/components/storefront/Produ
 import Link from "next/link";
 
 const SMARTPHONES: ProductCardData[] = [
-  { id: "1", title: "Samsung Galaxy S25 Ultra 5G – 12GB RAM 256GB Storage", slug: "samsung-galaxy-s25-ultra", priceAed: 3999, compareAtAed: 5099, imageUrl: "https://placehold.co/400x400/EDE8F5/3D52A0?text=S25+Ultra", brand: "Samsung" },
-  { id: "2", title: "Apple iPhone 17 Pro – 12GB RAM 256GB Storage", slug: "apple-iphone-17-pro", priceAed: 4699, imageUrl: "https://placehold.co/400x400/EDE8F5/3D52A0?text=iPhone+17", brand: "Apple", badge: "Auth. Reseller" },
-  { id: "3", title: "Samsung Galaxy S25 Ultra 5G – 12GB RAM 1TB", slug: "samsung-galaxy-s25-ultra-1tb", priceAed: 5199, compareAtAed: 6599, imageUrl: "https://placehold.co/400x400/EDE8F5/3D52A0?text=S25+1TB", brand: "Samsung" },
-  { id: "4", title: "Nothing Phone 3a Pro – 12GB RAM 256GB Gray", slug: "nothing-phone-3a-pro", priceAed: 1749, compareAtAed: 1849, imageUrl: "https://placehold.co/400x400/EDE8F5/3D52A0?text=Nothing+3a", brand: "Nothing" },
-  { id: "5", title: "Huawei Mate X6 4G – 12GB RAM 512GB Nebula Red", slug: "huawei-mate-x6", priceAed: 1599, compareAtAed: 1699, imageUrl: "https://placehold.co/400x400/EDE8F5/3D52A0?text=Mate+X6", brand: "Huawei" },
+  { id: "1", title: "Samsung Galaxy S25 Ultra 5G – 12GB RAM 256GB Storage", slug: "samsung-galaxy-s25-ultra", priceAed: 3999, compareAtAed: 5099, imageUrl: "/products/samsung-s25-ultra.jpg", brand: "Samsung" },
+  { id: "2", title: "Apple iPhone 17 Pro – 12GB RAM 256GB Storage", slug: "apple-iphone-17-pro", priceAed: 4699, imageUrl: "/products/iphone-17-pro.jpg", brand: "Apple", badge: "Auth. Reseller" },
+  { id: "3", title: "Samsung Galaxy S25 Ultra 5G – 12GB RAM 1TB", slug: "samsung-galaxy-s25-ultra-1tb", priceAed: 5199, compareAtAed: 6599, imageUrl: "/products/samsung-s25.jpg", brand: "Samsung" },
+  { id: "4", title: "Nothing Phone 3a Pro – 12GB RAM 256GB Gray", slug: "nothing-phone-3a-pro", priceAed: 1749, compareAtAed: 1849, imageUrl: "/products/nothing-phone-3a-pro.jpg", brand: "Nothing" },
+  { id: "5", title: "Huawei Mate X6 4G – 12GB RAM 512GB Nebula Red", slug: "huawei-mate-x6", priceAed: 1599, compareAtAed: 1699, imageUrl: "/products/huawei-mate-x6.jpg", brand: "Huawei" },
 ];
 
 const LAPTOPS: ProductCardData[] = [
-  { id: "6", title: 'Apple MacBook Pro 14" M4 – 16GB 512GB Space Black', slug: "macbook-pro-14-m4", priceAed: 6499, imageUrl: "https://placehold.co/400x400/EDE8F5/3D52A0?text=MacBook+M4", brand: "Apple", badge: "New" },
-  { id: "7", title: "Dell XPS 15 – Intel Core Ultra 9 32GB 1TB RTX 4060", slug: "dell-xps-15", priceAed: 7299, compareAtAed: 8499, imageUrl: "https://placehold.co/400x400/EDE8F5/3D52A0?text=XPS+15", brand: "Dell" },
-  { id: "8", title: "ASUS ROG Zephyrus G16 – RTX 4080 32GB 1TB", slug: "asus-rog-zephyrus-g16", priceAed: 9999, compareAtAed: 11999, imageUrl: "https://placehold.co/400x400/EDE8F5/3D52A0?text=ROG+G16", brand: "ASUS" },
-  { id: "9", title: "Microsoft Surface Laptop 7 – Snapdragon X Elite 16GB 512GB", slug: "surface-laptop-7", priceAed: 5299, imageUrl: "https://placehold.co/400x400/EDE8F5/3D52A0?text=Surface+7", brand: "Microsoft" },
+  { id: "6", title: 'Apple MacBook Pro 14" M4 – 16GB 512GB Space Black', slug: "macbook-pro-14-m4", priceAed: 6499, imageUrl: "/products/macbook-pro-14-m4.jpg", brand: "Apple", badge: "New" },
+  { id: "7", title: "HP OmniBook Ultra 15 – Core Ultra 9 32GB 1TB", slug: "hp-omnibook-ultra-15", priceAed: 7299, compareAtAed: 8499, imageUrl: "/assets/products/hp-ob-3-15-fn0005ne_4_.jpg", brand: "HP" },
+  { id: "8", title: "HP OMEN 16 – RTX 4080 32GB 1TB", slug: "hp-omen-16", priceAed: 9999, compareAtAed: 11999, imageUrl: "/assets/products/hp-omen16-u1003ne_1_.jpg", brand: "HP" },
+  { id: "9", title: "HP OmniBook 5F 14 – Snapdragon X Plus 16GB 512GB", slug: "hp-omnibook-5f-14", priceAed: 5299, imageUrl: "/assets/products/hp-ob-5f-14fp0002_4_.jpg", brand: "HP" },
 ];
 
 const WEARABLES: ProductCardData[] = [
-  { id: "10", title: "Samsung Galaxy Watch 7 – 44mm Titanium Silver", slug: "samsung-galaxy-watch-7", priceAed: 1299, compareAtAed: 1499, imageUrl: "https://placehold.co/400x400/EDE8F5/3D52A0?text=Watch+7", brand: "Samsung" },
-  { id: "11", title: "Apple Watch Ultra 2 – 49mm Titanium Natural", slug: "apple-watch-ultra-2", priceAed: 3799, imageUrl: "https://placehold.co/400x400/EDE8F5/3D52A0?text=Watch+Ultra", brand: "Apple" },
-  { id: "12", title: "Huawei Watch GT 5 Pro – 46mm Titanium", slug: "huawei-watch-gt5-pro", priceAed: 1199, compareAtAed: 1399, imageUrl: "https://placehold.co/400x400/EDE8F5/3D52A0?text=GT5+Pro", brand: "Huawei" },
-  { id: "13", title: "Samsung Galaxy Ring – Size 7 Titanium Black", slug: "samsung-galaxy-ring-7", priceAed: 999, imageUrl: "https://placehold.co/400x400/EDE8F5/3D52A0?text=Galaxy+Ring", brand: "Samsung" },
+  { id: "10", title: "Samsung Galaxy Watch 7 – 44mm Titanium Silver", slug: "samsung-galaxy-watch-7", priceAed: 1299, compareAtAed: 1499, imageUrl: "/products/samsung-galaxy-watch7.jpg", brand: "Samsung" },
+  { id: "11", title: "Apple Watch Ultra 2 – 49mm Titanium Natural", slug: "apple-watch-ultra-2", priceAed: 3799, imageUrl: "/products/apple-watch-ultra-2.jpg", brand: "Apple" },
+  { id: "12", title: "Huawei Watch GT 5 Pro – 46mm Titanium", slug: "huawei-watch-gt5-pro", priceAed: 1199, compareAtAed: 1399, imageUrl: "/products/samsung-galaxy-watch7.jpg", brand: "Huawei" },
+  { id: "13", title: "Samsung Galaxy Ring – Size 7 Titanium Black", slug: "samsung-galaxy-ring-7", priceAed: 999, imageUrl: "/products/apple-watch-ultra-2.jpg", brand: "Samsung" },
 ];
 
 function SectionHeader({ title, href }: { title: string; href: string }) {
@@ -55,14 +55,13 @@ export default function HomePage() {
         {/* Promo banners */}
         <div className="mx-auto max-w-[1280px] px-4 py-4 grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
-            { bg: "from-[#11131A] to-[#3D52A0]", label: "DREAME", sub: "Premium Home Appliances" },
-            { bg: "from-[#3D52A0] to-[#7091E6]", label: "TCL", sub: "Next-Gen MiniLED TVs" },
-            { bg: "from-[#7091E6] to-[#8697C4]", label: "KROME", sub: "Cooler Living This Summer" },
-          ].map(({ bg, label, sub }) => (
-            <div key={label} className={`rounded-xl bg-gradient-to-r ${bg} p-6 text-white h-28 flex flex-col justify-center cursor-pointer hover:opacity-90 transition-opacity`}>
-              <p className="text-xl font-extrabold">{label}</p>
-              <p className="text-xs text-white/70 mt-1">{sub}</p>
-            </div>
+            { img: "/assets/banners/dreame_jun_2026_offers_thumbnail.jpg", href: "/search?brand=dreame" },
+            { img: "/assets/banners/krome_summer_thumbnail.jpg", href: "/search?tag=krome" },
+            { img: "/assets/banners/tech_offers_d_2.png", href: "/search?tag=deals" },
+          ].map(({ img, href }) => (
+            <a key={img} href={href} className="rounded-xl overflow-hidden h-28 block hover:opacity-90 transition-opacity">
+              <img src={img} alt="" className="w-full h-full object-cover" />
+            </a>
           ))}
         </div>
 
