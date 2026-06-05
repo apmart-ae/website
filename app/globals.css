@@ -1,26 +1,53 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --apm-primary-900: #3D52A0;
+  --apm-primary-600: #7091E6;
+  --apm-primary-400: #8697C4;
+  --apm-primary-200: #ADBBDA;
+  --apm-primary-050: #EDE8F5;
+  --apm-ink:         #11131A;
+  --apm-bg:          #FFFFFF;
+  --apm-accent:      #7091E6;
+  --apm-success:     #16A34A;
+  --apm-sale:        #3D52A0;
+  --apm-sale-text:   #FFFFFF;
+  --apm-surface:     #F7F8FC;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--apm-bg);
+  color: var(--apm-ink);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: var(--apm-primary-400); border-radius: 3px; }
+
+.badge-sale {
+  background: var(--apm-sale);
+  color: var(--apm-sale-text);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--apm-primary-600);
+  outline-offset: 2px;
+}
+
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.ticker-track { animation: ticker 30s linear infinite; }
+
+.product-card { transition: box-shadow 0.2s, transform 0.2s; }
+.product-card:hover { box-shadow: 0 4px 20px 0 rgba(61,82,160,0.15); transform: translateY(-2px); }
