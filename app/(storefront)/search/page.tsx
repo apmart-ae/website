@@ -17,7 +17,25 @@ async function fetchResults(q: string): Promise<ProductCardData[]> {
     return products.map(toCard);
   }
 
-  const words = q.trim().split(/\s+/).filter(Boolean);
+  // Normalize words: strip non-alphanumeric chars (removes +, &, etc.)
+  const words = q.trim()
+    .split(/\s+/)
+    .map(w => w.replace(/[^a-zA-Z0-9]/g, ""))
+    .filter(w => w.length > 1);
+
+  if (words.length === 0) {
+    const products = await db.product.findMany({
+      where: { isActive: true },
+      include: {
+        brand: { select: { name: true } },
+        images: { orderBy: { sortOrder: "asc" }, take: 1 },
+        variants: { where: { isDefault: true }, take: 1 },
+      },
+      orderBy: [{ isFeatured: "desc" }, { createdAt: "desc" }],
+      take: 60,
+    });
+    return products.map(toCard);
+  }
 
   const products = await db.product.findMany({
     where: {
