@@ -33,7 +33,7 @@ export default function Header() {
 
         {/* Logo */}
         <Link href="/" className="shrink-0">
-          <img src="/brand/logo.svg" alt="APMART.AE" className="h-9 w-auto" />
+          <img src="/logo.png" alt="APMART.AE" className="h-12 w-auto" />
         </Link>
 
         {/* Search bar */}

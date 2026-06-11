@@ -11,12 +11,6 @@ const SLIDES = [
     href: "/search?tag=deals",
   },
   {
-    id: 2,
-    img: "/assets/banners/summer_2026_deals_d.jpg",
-    imgMobile: "/assets/banners/summer_2026_deals_m.jpg",
-    href: "/search?tag=summer",
-  },
-  {
     id: 3,
     img: "/assets/banners/macbook_pro_14_d.png",
     imgMobile: "/assets/banners/macbook_pro_14_m.png",

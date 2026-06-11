@@ -17,7 +17,7 @@ export default function TermsPage() {
           ["7. Limitation of Liability", "APMART.AE is not liable for any indirect, incidental, or consequential damages arising from the use of this site or its products beyond the purchase price of the product."],
           ["8. Governing Law", "These Terms are governed by the laws of the UAE and the Emirate of Dubai. Any disputes shall be subject to the exclusive jurisdiction of Dubai courts."],
           ["9. Changes to Terms", "We reserve the right to modify these Terms at any time. Continued use of the website following changes constitutes acceptance of the updated Terms."],
-          ["10. Contact", "For any questions regarding these Terms, contact us at legal@apmart.ae or +971 4 200 0000."],
+          ["10. Contact", "For any questions regarding these Terms, contact us at legal@apmart.ae or +971 52 574 6541."],
         ].map(([title, body]) => (
           <section key={title as string}>
             <h2 className="font-bold text-gray-800 mb-1">{title}</h2>

@@ -108,7 +108,7 @@ export default function HomePage() {
 
       {/* WhatsApp FAB */}
       <a
-        href="https://wa.me/971420000000"
+        href="https://wa.me/971525746541"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-[#1da851] text-white rounded-full p-3.5 shadow-lg transition-transform hover:scale-110"

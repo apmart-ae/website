@@ -52,12 +52,12 @@ export default function ContactPage() {
             {
               icon: Phone,
               title: "Call Us",
-              lines: ["+971 4 200 0000", "Sun–Thu 9am–7pm GST"],
+              lines: ["+971 52 574 6541", "Sun–Thu 9am–7pm GST"],
             },
             {
               icon: MessageCircle,
               title: "WhatsApp",
-              lines: ["+971 55 000 0000", "Quick replies · 9am–10pm daily"],
+              lines: ["+971 52 574 6541", "Quick replies · 9am–10pm daily"],
             },
             {
               icon: Mail,

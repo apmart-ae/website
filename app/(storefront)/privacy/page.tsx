@@ -16,7 +16,7 @@ export default function PrivacyPage() {
           ["6. Cookies", "We use essential cookies (session, cart), functional cookies (preferences), and analytical cookies (Google Analytics). You can manage cookie preferences via your browser settings. Disabling essential cookies will affect cart and checkout functionality."],
           ["7. Your Rights", "Under UAE data protection law, you have the right to access, correct, or delete your personal data. To exercise these rights, email privacy@apmart.ae. We will respond within 10 business days."],
           ["8. Security", "We use HTTPS encryption, access controls, and regular security audits to protect your data. Despite these measures, no system is completely secure."],
-          ["9. Contact", "For privacy enquiries: privacy@apmart.ae or +971 4 200 0000 (attn: Data Protection)."],
+          ["9. Contact", "For privacy enquiries: privacy@apmart.ae or +971 52 574 6541 (attn: Data Protection)."],
         ].map(([title, body]) => (
           <section key={title as string}>
             <h2 className="font-bold text-gray-800 mb-1">{title}</h2>
