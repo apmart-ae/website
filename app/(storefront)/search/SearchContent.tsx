@@ -1,23 +1,8 @@
 "use client";
 import { useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import ProductCard, { type ProductCardData } from "@/components/storefront/ProductCard";
 import { Search, SlidersHorizontal, X } from "lucide-react";
-
-const ALL_PRODUCTS: ProductCardData[] = [
-  { id: "1",  title: "Samsung Galaxy S25 Ultra 5G – 12GB 256GB",     slug: "samsung-galaxy-s25-ultra",   priceAed: 3999, compareAtAed: 5099, imageUrl: "/products/samsung-s25-ultra.jpg",          brand: "Samsung"   },
-  { id: "2",  title: "Apple iPhone 17 Pro – 256GB Natural Titanium",  slug: "apple-iphone-17-pro",         priceAed: 4699,                    imageUrl: "/products/iphone-17-pro.jpg",              brand: "Apple",    badge: "New" },
-  { id: "3",  title: "Nothing Phone 3a Pro – 12GB 256GB",             slug: "nothing-phone-3a-pro",        priceAed: 1749, compareAtAed: 1849, imageUrl: "/products/nothing-phone-3a-pro.jpg",       brand: "Nothing"   },
-  { id: "4",  title: "Huawei Mate X6 Foldable – 512GB",              slug: "huawei-mate-x6",              priceAed: 1599, compareAtAed: 1699, imageUrl: "/products/huawei-mate-x6.jpg",             brand: "Huawei"    },
-  { id: "5",  title: "Xiaomi 15 Ultra – 16GB 512GB",                  slug: "xiaomi-15-ultra",             priceAed: 3299, compareAtAed: 3799, imageUrl: "/products/xiaomi-15-ultra.jpg",            brand: "Xiaomi"    },
-  { id: "6",  title: 'Apple MacBook Pro 14" M4 Pro – 24GB 512GB',    slug: "macbook-pro-14-m4-pro",       priceAed: 8499,                    imageUrl: "/products/macbook-pro-14-m4.jpg",          brand: "Apple",    badge: "New" },
-  { id: "7",  title: "Dell XPS 15 – Core Ultra 9 32GB RTX4060",      slug: "dell-xps-15",                 priceAed: 7299, compareAtAed: 8499, imageUrl: "/products/dell-xps-15.png",                brand: "Dell"      },
-  { id: "8",  title: "ASUS ROG Zephyrus G16 – RTX4080 32GB",         slug: "asus-rog-zephyrus-g16",       priceAed: 9999, compareAtAed:11999, imageUrl: "/products/asus-rog-zephyrus-g16.jpg",      brand: "ASUS"      },
-  { id: "9",  title: "Microsoft Surface Laptop 7 – 16GB 512GB",      slug: "surface-laptop-7",            priceAed: 5299,                    imageUrl: "/products/microsoft-surface-laptop-7.png", brand: "Microsoft" },
-  { id: "10", title: "Apple Watch Ultra 2 – 49mm Titanium",           slug: "apple-watch-ultra-2",         priceAed: 3799,                    imageUrl: "/products/apple-watch-ultra-2.jpg",        brand: "Apple"     },
-  { id: "11", title: "Samsung Galaxy Watch 7 – 44mm",                 slug: "samsung-galaxy-watch-7",      priceAed: 1299, compareAtAed: 1499, imageUrl: "/products/samsung-galaxy-watch7.jpg",      brand: "Samsung"   },
-  { id: "12", title: "HP Spectre x360 14 – 16GB 1TB OLED",           slug: "hp-spectre-x360-14",          priceAed: 6499, compareAtAed: 7299, imageUrl: "/products/hp-spectre-x360.png",            brand: "HP"        },
-];
 
 const SORT_OPTIONS = [
   { value: "default",    label: "Default"           },
@@ -26,20 +11,21 @@ const SORT_OPTIONS = [
   { value: "discount",   label: "Biggest Discount"  },
 ];
 
-export default function SearchContent() {
-  const searchParams = useSearchParams();
-  const initial = searchParams.get("q") ?? "";
-  const [query,  setQuery]  = useState(initial);
+interface Props {
+  initialQuery: string;
+  initialResults: ProductCardData[];
+}
+
+export default function SearchContent({ initialQuery, initialResults }: Props) {
+  const router = useRouter();
+  const [query,  setQuery]  = useState(initialQuery);
   const [sort,   setSort]   = useState("default");
   const [brands, setBrands] = useState<string[]>([]);
 
-  const allBrands = [...new Set(ALL_PRODUCTS.map(p => p.brand!))].sort();
+  const allBrands = [...new Set(initialResults.map(p => p.brand!))].sort();
 
-  const filtered = ALL_PRODUCTS
-    .filter(p =>
-      (!query || p.title.toLowerCase().includes(query.toLowerCase()) || p.brand?.toLowerCase().includes(query.toLowerCase())) &&
-      (brands.length === 0 || brands.includes(p.brand!))
-    )
+  const filtered = initialResults
+    .filter(p => brands.length === 0 || brands.includes(p.brand!))
     .sort((a, b) => {
       if (sort === "price-asc")  return a.priceAed - b.priceAed;
       if (sort === "price-desc") return b.priceAed - a.priceAed;
@@ -51,7 +37,13 @@ export default function SearchContent() {
       return 0;
     });
 
-  const toggleBrand = (b: string) => setBrands(prev => prev.includes(b) ? prev.filter(x => x !== b) : [...prev, b]);
+  const doSearch = () => {
+    const q = query.trim();
+    router.push(q ? `/search?q=${encodeURIComponent(q)}` : "/search");
+  };
+
+  const toggleBrand = (b: string) =>
+    setBrands(prev => prev.includes(b) ? prev.filter(x => x !== b) : [...prev, b]);
 
   return (
     <div className="mx-auto max-w-[1280px] px-4 py-6">
@@ -64,11 +56,18 @@ export default function SearchContent() {
             type="text"
             value={query}
             onChange={e => setQuery(e.target.value)}
+            onKeyDown={e => e.key === "Enter" && doSearch()}
             placeholder="Search products, brands…"
             className="flex-1 text-sm outline-none"
           />
-          {query && <button onClick={() => setQuery("")}><X size={14} className="text-gray-400" /></button>}
+          {query && <button onClick={() => { setQuery(""); router.push("/search"); }}><X size={14} className="text-gray-400" /></button>}
         </div>
+        <button
+          onClick={doSearch}
+          className="bg-[#3D52A0] text-white px-5 rounded-xl text-sm font-medium hover:bg-[#7091E6] transition-colors"
+        >
+          Search
+        </button>
         <select
           value={sort}
           onChange={e => setSort(e.target.value)}
@@ -109,8 +108,8 @@ export default function SearchContent() {
         {/* Results */}
         <div className="flex-1 min-w-0">
           <p className="text-sm text-gray-500 mb-4">
-            {query ? (
-              <><span className="font-semibold text-gray-800">{filtered.length}</span> results for &quot;{query}&quot;</>
+            {initialQuery ? (
+              <><span className="font-semibold text-gray-800">{filtered.length}</span> results for &quot;{initialQuery}&quot;</>
             ) : (
               <><span className="font-semibold text-gray-800">{filtered.length}</span> products</>
             )}
