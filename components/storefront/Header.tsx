@@ -114,13 +114,13 @@ export default function Header() {
                         </Link>
                         {"items" in sub && Array.isArray(sub.items) && (
                           <ul className="space-y-1">
-                            {sub.items.map((item: string) => (
-                              <li key={item}>
+                            {sub.items.map((item: { label: string; href: string }) => (
+                              <li key={item.label}>
                                 <Link
-                                  href={`/search?q=${encodeURIComponent(item)}`}
+                                  href={item.href}
                                   className="text-xs text-gray-600 hover:text-[#3D52A0]"
                                 >
-                                  {item}
+                                  {item.label}
                                 </Link>
                               </li>
                             ))}

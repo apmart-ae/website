@@ -15,7 +15,13 @@ export const NAV_CATEGORIES = [
       {
         label: "Accessories",
         slug: "mobile-accessories",
-        items: ["Cases", "Screen Guard", "Battery & Charger", "Power Banks", "Adapters", "Headphones"],
+        items: [
+          { label: "Cases",              href: "/search?q=cases" },
+          { label: "Screen Guard",       href: "/search?q=screen+guard" },
+          { label: "Battery & Charger",  href: "/search?q=charger" },
+          { label: "Power Banks",        href: "/search?q=power+bank" },
+          { label: "Headphones",         href: "/search?q=earbuds" },
+        ],
       },
     ],
   },
@@ -35,15 +41,25 @@ export const NAV_CATEGORIES = [
     sub: [
       {
         label: "Computers",
-        slug: "computers",
-        items: ["Windows Laptops", "Copilot+ PCs", "MacBooks", "Gaming Laptops", "Monitors"],
+        slug: "laptops",
+        items: [
+          { label: "Windows Laptops",  href: "/search?q=windows+laptop" },
+          { label: "Copilot+ PCs",     href: "/search?q=copilot" },
+          { label: "MacBooks",         href: "/search?q=macos" },
+          { label: "Gaming Laptops",   href: "/category/gaming-laptops" },
+          { label: "Monitors",         href: "/category/monitors" },
+        ],
       },
       { label: "Printers & Scanners", slug: "printers-scanners" },
-      { label: "Tablets", slug: "computing-tablets" },
+      { label: "Tablets",             slug: "tablets" },
       {
         label: "Accessories",
         slug: "computing-accessories",
-        items: ["Mouse & Keyboard", "Headsets", "Data Hubs"],
+        items: [
+          { label: "Mouse & Keyboard", href: "/search?q=mouse+keyboard" },
+          { label: "Headsets",         href: "/search?q=headset" },
+          { label: "Data Hubs",        href: "/search?q=hub" },
+        ],
       },
     ],
   },
@@ -54,9 +70,9 @@ export const NAV_CATEGORIES = [
     slug: "accessories",
     sub: [
       { label: "Mobile & Tablet", slug: "mobile-tablet-accessories" },
-      { label: "Computing", slug: "computing-accessories-top" },
-      { label: "TV & Audio", slug: "tv-audio-accessories" },
-      { label: "eScooter", slug: "escooter-accessories" },
+      { label: "Computing",       slug: "computing-accessories-top" },
+      { label: "TV & Audio",      slug: "tv-audio-accessories" },
+      { label: "eScooter",        slug: "escooter-accessories" },
     ],
   },
 ];
