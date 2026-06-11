@@ -1,0 +1,37 @@
+
+> apmart@0.1.0 dev
+> next dev
+
+⚠ Port 3000 is in use by process 6616, using available port 3002 instead.
+▲ Next.js 16.2.7 (Turbopack)
+- Local:         http://localhost:3002
+- Network:       http://192.168.1.43:3002
+✓ Ready in 564ms
+
+ GET / 200 in 1001ms (next.js: 448ms, application-code: 553ms)
+  Reload env: .env
+✓ Compiled in 342ms
+ GET / 200 in 779ms (next.js: 436ms, application-code: 343ms)
+ GET / 200 in 169ms (next.js: 4ms, application-code: 164ms)
+ GET / 200 in 69ms (next.js: 3ms, application-code: 66ms)
+  Reload env: .env
+ GET / 200 in 377ms (next.js: 215ms, application-code: 162ms)
+  Reload env: .env
+ GET / 200 in 148ms (next.js: 53ms, application-code: 95ms)
+  Reload env: .env
+ GET / 200 in 118ms (next.js: 39ms, application-code: 80ms)
+  Reload env: .env
+ GET / 200 in 101ms (next.js: 44ms, application-code: 57ms)
+  Reload env: .env
+ GET / 200 in 114ms (next.js: 49ms, application-code: 64ms)
+  Reload env: .env
+ GET / 200 in 129ms (next.js: 43ms, application-code: 86ms)
+✓ Compiled in 694ms
+ GET / 200 in 243ms (next.js: 56ms, application-code: 187ms)
+ GET / 200 in 110ms (next.js: 4ms, application-code: 107ms)
+ GET / 200 in 50ms (next.js: 3ms, application-code: 48ms)
+✓ Compiled in 44ms
+ GET / 200 in 270ms (next.js: 55ms, application-code: 215ms)
+ GET / 200 in 163ms (next.js: 2ms, application-code: 160ms)
+ GET / 200 in 91ms (next.js: 36ms, application-code: 55ms)
+ GET / 200 in 93ms (next.js: 3ms, application-code: 90ms)
