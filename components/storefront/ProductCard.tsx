@@ -1,6 +1,10 @@
+"use client";
+import { useState } from "react";
 import Link from "next/link";
-import { Heart } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Heart, Check } from "lucide-react";
 import { formatAed, discountPct, cn } from "@/lib/utils";
+import { useCart } from "@/lib/cart";
 
 export interface ProductCardData {
   id: string;
@@ -13,10 +17,38 @@ export interface ProductCardData {
   rating?: number;
   reviewCount?: number;
   badge?: string;
+  variantId?: string;
+  sku?: string;
+  weightKg?: number;
 }
 
 export default function ProductCard({ product }: { product: ProductCardData }) {
   const pct = product.compareAtAed ? discountPct(product.priceAed, product.compareAtAed) : 0;
+  const { addItem } = useCart();
+  const router = useRouter();
+  const [added, setAdded] = useState(false);
+
+  const handleAdd = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!product.variantId) {
+      router.push(`/product/${product.slug}`);
+      return;
+    }
+    addItem({
+      variantId: product.variantId,
+      productId: product.id,
+      slug: product.slug,
+      title: product.title,
+      brand: product.brand ?? "",
+      sku: product.sku ?? product.variantId,
+      imageUrl: product.imageUrl,
+      priceAed: product.priceAed,
+      qty: 1,
+      weightKg: product.weightKg ?? 0.3,
+    });
+    setAdded(true);
+    setTimeout(() => setAdded(false), 1800);
+  };
 
   return (
     <div className="product-card group relative bg-white rounded-2xl border border-gray-100 overflow-hidden flex flex-col">
@@ -59,8 +91,14 @@ export default function ProductCard({ product }: { product: ProductCardData }) {
               <p className="text-[11px] text-gray-400 line-through">{formatAed(product.compareAtAed)}</p>
             )}
           </div>
-          <button className="shrink-0 bg-[#3D52A0] hover:bg-[#7091E6] text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors">
-            Add
+          <button
+            onClick={handleAdd}
+            className={cn(
+              "shrink-0 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-all flex items-center gap-1",
+              added ? "bg-green-500" : "bg-[#3D52A0] hover:bg-[#7091E6]"
+            )}
+          >
+            {added ? <><Check size={12} /> Added</> : "Add"}
           </button>
         </div>
       </div>

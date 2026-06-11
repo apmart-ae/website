@@ -53,6 +53,9 @@ function toCard(p: any): ProductCardData {
     imageUrl: p.images[0]?.url ?? `https://placehold.co/400x400/EDE8F5/3D52A0?text=${encodeURIComponent(p.title)}`,
     brand: p.brand.name,
     badge: p.tags.includes("new") ? "New" : p.tags.includes("bestseller") ? "Bestseller" : undefined,
+    variantId: p.variants[0]?.id,
+    sku: p.variants[0]?.sku,
+    weightKg: p.variants[0]?.weightKg ? Number(p.variants[0].weightKg) : 0.3,
   };
 }
 
