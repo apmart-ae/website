@@ -1,11 +1,11 @@
-"use client";
+﻿"use client";
 import { Phone, Mail, MapPin, MessageCircle } from "lucide-react";
 
 export default function ContactPage() {
   return (
     <main className="max-w-5xl mx-auto px-4 py-12">
       <h1 className="text-3xl font-extrabold text-[#3D52A0] mb-2">Contact Us</h1>
-      <p className="text-gray-500 mb-10">We're here to help — reach us any way you prefer.</p>
+      <p className="text-gray-500 mb-10">We're here to help â€” reach us any way you prefer.</p>
 
       <div className="grid md:grid-cols-2 gap-8">
         {/* Contact form */}
@@ -52,12 +52,12 @@ export default function ContactPage() {
             {
               icon: Phone,
               title: "Call Us",
-              lines: ["+971 52 574 6541", "Sun–Thu 9am–7pm GST"],
+              lines: ["+971 52 505 3425", "Sunâ€“Thu 9amâ€“7pm GST"],
             },
             {
               icon: MessageCircle,
               title: "WhatsApp",
-              lines: ["+971 52 574 6541", "Quick replies · 9am–10pm daily"],
+              lines: ["+971 52 505 3425", "Quick replies Â· 9amâ€“10pm daily"],
             },
             {
               icon: Mail,
@@ -67,7 +67,7 @@ export default function ContactPage() {
             {
               icon: MapPin,
               title: "Showroom",
-              lines: ["Unit 14, Dubai Silicon Oasis", "Dubai, UAE · Open Sun–Fri 10am–8pm"],
+              lines: ["Unit 14, Dubai Silicon Oasis", "Dubai, UAE Â· Open Sunâ€“Fri 10amâ€“8pm"],
             },
           ].map(({ icon: Icon, title, lines }) => (
             <div key={title} className="bg-white rounded-2xl border border-gray-100 p-6 flex gap-4">

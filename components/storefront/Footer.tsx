@@ -101,8 +101,8 @@ export default function Footer() {
           <a href="mailto:info@apmart.ae" className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-[#7091E6]">
             <Mail size={14} /> info@apmart.ae
           </a>
-          <a href="https://wa.me/971525746541" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-[#7091E6]">
-            <Phone size={14} /> +971 52 574 6541
+          <a href="https://wa.me/971525053425" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-[#7091E6]">
+            <Phone size={14} /> +971 52 505 3425
           </a>
           <p className="ml-auto text-xs text-gray-600">© {new Date().getFullYear()} APMART.AE. All rights reserved.</p>
         </div>

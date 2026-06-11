@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 export default function AdminSettingsPage() {
   return (
     <div>
@@ -8,7 +8,7 @@ export default function AdminSettingsPage() {
         <div className="bg-white rounded-2xl border border-gray-100 p-6">
           <h2 className="font-bold text-gray-700 mb-4 text-sm">Store Settings</h2>
           <div className="space-y-4">
-            {[["Store Name","APMART.AE"],["Store Email","info@apmart.ae"],["Store Phone","+971 52 574 6541"],["Currency","AED"],["VAT Rate (%)","5"]].map(([label, val]) => (
+            {[["Store Name","APMART.AE"],["Store Email","info@apmart.ae"],["Store Phone","+971 52 505 3425"],["Currency","AED"],["VAT Rate (%)","5"]].map(([label, val]) => (
               <div key={label}>
                 <label className="text-xs font-semibold text-gray-500 block mb-1">{label}</label>
                 <input defaultValue={val} className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-[#3D52A0]" />
