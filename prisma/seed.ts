@@ -1164,6 +1164,56 @@ async function main() {
       ],
     },
 
+    // ── Windows Laptops (eros.ae) ─────────────────────────────────────────────
+    {
+      title: "ASUS Vivobook S 14 Flip AMD",
+      slug: "asus-vivobook-s14-flip-amd",
+      description: "AMD Ryzen 5-7430U, 8GB RAM, 512GB SSD, 14\" WUXGA 60Hz touchscreen, 360° convertible, Windows 11 Home.",
+      brandId: B.asus, categoryId: SC.laptops,
+      attributes: { ram: "8GB", storage: "512GB", screenSize: '14"', os: "Windows 11" },
+      tags: ["windows", "laptop", "2-in-1"],
+      images: ["/products/windows-laptops/4b3b555ec76207aff5d44b77b21a9565-hi.jpg"],
+      variants: [
+        { sku: "VBS14F-AMD-8-512-BLU", ram: "8GB", storage: "512GB", color: "Quiet Blue", priceAed: 2299, stock: 18, weightKg: 1.500, isDefault: true },
+      ],
+    },
+    {
+      title: "ASUS Vivobook S 14 Flip Intel",
+      slug: "asus-vivobook-s14-flip-intel",
+      description: "Intel Core i5-1335U, 8GB RAM, 512GB SSD, 14\" WUXGA IPS 60Hz touchscreen, 360° convertible, Windows 11 Home.",
+      brandId: B.asus, categoryId: SC.laptops,
+      attributes: { ram: "8GB", storage: "512GB", screenSize: '14"', os: "Windows 11" },
+      tags: ["windows", "laptop", "2-in-1"],
+      images: ["/products/windows-laptops/71sxxp7jwkl._ac_sl1500__1_.jpg"],
+      variants: [
+        { sku: "VBS14F-I5-8-512-SLV", ram: "8GB", storage: "512GB", color: "Cool Silver", priceAed: 2499, stock: 15, weightKg: 1.500, isDefault: true },
+      ],
+    },
+    {
+      title: "ASUS Vivobook 15",
+      slug: "asus-vivobook-15",
+      description: "Intel Core i5-1240U, 8GB RAM, 512GB SSD, 15.6\" FHD 1920×1080, Intel UHD Graphics, Windows 11 Home.",
+      brandId: B.asus, categoryId: SC.laptops,
+      attributes: { ram: "8GB", storage: "512GB", screenSize: '15.6"', os: "Windows 11" },
+      tags: ["windows", "laptop"],
+      images: ["/products/windows-laptops/71we_msl9-l._ac_sl1500__1.jpg"],
+      variants: [
+        { sku: "VB15-I5-8-512-SLV", ram: "8GB", storage: "512GB", color: "Cool Silver", priceAed: 2299, stock: 20, weightKg: 1.650, isDefault: true },
+      ],
+    },
+    {
+      title: "MSI Thin 15 B13UC Gaming",
+      slug: "msi-thin-15-b13uc",
+      description: "Intel Core i7-13620H, 16GB RAM, 512GB SSD, 15.6\" FHD 144Hz IPS, NVIDIA GeForce RTX 3050 4GB, Windows 11.",
+      brandId: B.msi, categoryId: SC["gaming-laptops"], isFeatured: true,
+      attributes: { ram: "16GB", storage: "512GB", screenSize: '15.6"', os: "Windows 11", gpu: "RTX 3050 4GB" },
+      tags: ["gaming", "windows", "laptop", "pc"],
+      images: ["/products/windows-laptops/9s7-16r831-2610_3_.jpg"],
+      variants: [
+        { sku: "THIN15-I7-16-512-BLK", ram: "16GB", storage: "512GB", color: "Cosmos Gray", priceAed: 3499, stock: 12, weightKg: 1.860, isDefault: true },
+      ],
+    },
+
     {
       title: "Samsung Galaxy Tab S9 FE",
       slug: "samsung-galaxy-tab-s9fe",
