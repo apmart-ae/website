@@ -11,16 +11,18 @@ async function main() {
 
   // ── Brands ─────────────────────────────────────────────────────────────────
   const brands = await Promise.all([
-    db.brand.upsert({ where: { slug: "apple" },    update: {}, create: { name: "Apple",     slug: "apple",     logoUrl: "/brand/logos/apple.svg"    } }),
-    db.brand.upsert({ where: { slug: "samsung" },  update: {}, create: { name: "Samsung",   slug: "samsung",   logoUrl: "/brand/logos/samsung.svg"  } }),
-    db.brand.upsert({ where: { slug: "huawei" },   update: {}, create: { name: "Huawei",    slug: "huawei",    logoUrl: "/brand/logos/huawei.svg"   } }),
-    db.brand.upsert({ where: { slug: "dell" },     update: {}, create: { name: "Dell",      slug: "dell",      logoUrl: "/brand/logos/dell.svg"     } }),
-    db.brand.upsert({ where: { slug: "asus" },     update: {}, create: { name: "ASUS",      slug: "asus",      logoUrl: "/brand/logos/asus.svg"     } }),
-    db.brand.upsert({ where: { slug: "microsoft" },update: {}, create: { name: "Microsoft", slug: "microsoft", logoUrl: "/brand/logos/microsoft.svg"} }),
-    db.brand.upsert({ where: { slug: "sony" },     update: {}, create: { name: "Sony",      slug: "sony",      logoUrl: "/brand/logos/sony.svg"     } }),
-    db.brand.upsert({ where: { slug: "nothing" },  update: {}, create: { name: "Nothing",   slug: "nothing",   logoUrl: "/brand/logos/nothing.svg"  } }),
-    db.brand.upsert({ where: { slug: "xiaomi" },   update: {}, create: { name: "Xiaomi",    slug: "xiaomi",    logoUrl: "/brand/logos/xiaomi.svg"   } }),
-    db.brand.upsert({ where: { slug: "hp" },       update: {}, create: { name: "HP",        slug: "hp",        logoUrl: "/brand/logos/hp.svg"       } }),
+    db.brand.upsert({ where: { slug: "apple" },    update: { logoUrl: "/brand/logos/Apple.jpg" },    create: { name: "Apple",     slug: "apple",     logoUrl: "/brand/logos/Apple.jpg"    } }),
+    db.brand.upsert({ where: { slug: "samsung" },  update: { logoUrl: "/brand/logos/Samsung.jpg" },  create: { name: "Samsung",   slug: "samsung",   logoUrl: "/brand/logos/Samsung.jpg"  } }),
+    db.brand.upsert({ where: { slug: "huawei" },   update: { logoUrl: "/brand/logos/Huawei.png" },   create: { name: "Huawei",    slug: "huawei",    logoUrl: "/brand/logos/Huawei.png"   } }),
+    db.brand.upsert({ where: { slug: "dell" },     update: { logoUrl: "/brand/logos/Dell.jpg" },     create: { name: "Dell",      slug: "dell",      logoUrl: "/brand/logos/Dell.jpg"     } }),
+    db.brand.upsert({ where: { slug: "asus" },     update: { logoUrl: "/brand/logos/Asus.jpg" },     create: { name: "ASUS",      slug: "asus",      logoUrl: "/brand/logos/Asus.jpg"     } }),
+    db.brand.upsert({ where: { slug: "microsoft" },update: { logoUrl: "/brand/logos/Microsoft.jpg" },create: { name: "Microsoft", slug: "microsoft", logoUrl: "/brand/logos/Microsoft.jpg"} }),
+    db.brand.upsert({ where: { slug: "sony" },     update: { logoUrl: "/brand/logos/Sony.jpg" },     create: { name: "Sony",      slug: "sony",      logoUrl: "/brand/logos/Sony.jpg"     } }),
+    db.brand.upsert({ where: { slug: "nothing" },  update: { logoUrl: "/brand/logos/Nothing.jpg" },  create: { name: "Nothing",   slug: "nothing",   logoUrl: "/brand/logos/Nothing.jpg"  } }),
+    db.brand.upsert({ where: { slug: "xiaomi" },   update: { logoUrl: "/brand/logos/Xiaomi.jpg" },   create: { name: "Xiaomi",    slug: "xiaomi",    logoUrl: "/brand/logos/Xiaomi.jpg"   } }),
+    db.brand.upsert({ where: { slug: "hp" },       update: { logoUrl: "/brand/logos/HP.jpg" },       create: { name: "HP",        slug: "hp",        logoUrl: "/brand/logos/HP.jpg"       } }),
+    db.brand.upsert({ where: { slug: "honor" },    update: { logoUrl: "/brand/logos/Honor.jpg" },    create: { name: "Honor",     slug: "honor",     logoUrl: "/brand/logos/Honor.jpg"    } }),
+    db.brand.upsert({ where: { slug: "oppo" },     update: { logoUrl: "/brand/logos/Oppo.jpg" },     create: { name: "OPPO",      slug: "oppo",      logoUrl: "/brand/logos/Oppo.jpg"     } }),
   ]);
 
   const B: Record<string, string> = Object.fromEntries(brands.map(b => [b.slug, b.id]));
@@ -46,15 +48,14 @@ async function main() {
     db.category.upsert({ where: { slug: "smart-watches" },update: {}, create: { name: "Smart Watches",slug: "smart-watches",parentId: C["wearables"]       } }),
     db.category.upsert({ where: { slug: "laptops" },      update: {}, create: { name: "Laptops",      slug: "laptops",      parentId: C["computing"]       } }),
     db.category.upsert({ where: { slug: "monitors" },     update: {}, create: { name: "Monitors",     slug: "monitors",     parentId: C["computing"]       } }),
+    db.category.upsert({ where: { slug: "foldables" },    update: {}, create: { name: "Foldables",    slug: "foldables",    parentId: C["mobiles-tablets"] } }),
   ]);
 
   const SC: Record<string, string> = Object.fromEntries(subCats.map(c => [c.slug, c.id]));
 
   // ── Products ───────────────────────────────────────────────────────────────
-  const PLACEHOLDER = (text: string) => `https://placehold.co/600x600/EDE8F5/3D52A0?text=${encodeURIComponent(text)}`;
-
   const products = [
-    // ---- Smartphones ----
+    // ── Smartphones ──────────────────────────────────────────────────────────
     {
       title: "Samsung Galaxy S25 Ultra 5G",
       slug: "samsung-galaxy-s25-ultra",
@@ -62,21 +63,67 @@ async function main() {
       brandId: B.samsung, categoryId: SC.smartphones, isFeatured: true,
       attributes: { ram: "12GB", sim: "Dual SIM 5G", camera: "200MP", screenSize: '6.9"', os: "Android 15" },
       tags: ["bestseller", "5g", "flagship"],
-      images: [PLACEHOLDER("S25 Ultra"), PLACEHOLDER("S25 Ultra Back")],
+      images: [
+        "/products/samsung-s25-series/sms938bzkimeaw_1_.jpg",
+        "/products/samsung-s25-series/sms938bzbimeaw_1_.jpg",
+        "/products/samsung-s25-series/sms938bzgimeaw-pr7_1_.jpg",
+        "/products/samsung-s25-ultra.jpg",
+      ],
       variants: [
-        { sku: "S25U-256-GRAY",  storage: "256GB", color: "Titanium Gray",  priceAed: 3999, compareAtAed: 5099, stock: 24, weightKg: 0.218 },
-        { sku: "S25U-512-GRAY",  storage: "512GB", color: "Titanium Gray",  priceAed: 4499, stock: 12, weightKg: 0.218 },
-        { sku: "S25U-1TB-BLACK", storage: "1TB",   color: "Titanium Black", priceAed: 5199, compareAtAed: 6599, stock: 8, weightKg: 0.218, isDefault: false },
+        { sku: "S25U-256-GRAY",  storage: "256GB", color: "Titanium Gray",    priceAed: 3999, compareAtAed: 5099, stock: 24, weightKg: 0.218, isDefault: true },
+        { sku: "S25U-512-BLACK", storage: "512GB", color: "Titanium Black",   priceAed: 4499, stock: 12, weightKg: 0.218 },
+        { sku: "S25U-1TB-BLUE",  storage: "1TB",   color: "Titanium Blue",    priceAed: 5199, compareAtAed: 6599, stock: 8, weightKg: 0.218 },
+      ],
+    },
+    {
+      title: "Samsung Galaxy S26",
+      slug: "samsung-galaxy-s26",
+      description: "Next-gen Galaxy with Exynos 2600, 50MP ProVisual Engine, and AI-powered photography.",
+      brandId: B.samsung, categoryId: SC.smartphones, isFeatured: true,
+      attributes: { ram: "12GB", sim: "Dual SIM 5G", camera: "50MP", screenSize: '6.2"', os: "Android 16" },
+      tags: ["new", "5g", "flagship"],
+      images: [
+        "/products/samsung-s26/S26_Black.jpg",
+        "/products/samsung-s26/S26_Sky_blue.jpg",
+        "/products/samsung-s26/sm-s942_galaxys26_front_black_251128_1_.jpg",
+        "/products/samsung-s26/sm-s942_galaxys26_front_skyblue_251128_4_.jpg",
+      ],
+      variants: [
+        { sku: "S26-256-BLACK",   storage: "256GB", color: "Phantom Black",  priceAed: 3299, compareAtAed: 3599, stock: 30, weightKg: 0.162, isDefault: true },
+        { sku: "S26-256-BLUE",    storage: "256GB", color: "Sky Blue",       priceAed: 3299, stock: 25, weightKg: 0.162 },
+        { sku: "S26-512-VIOLET",  storage: "512GB", color: "Cobalt Violet",  priceAed: 3799, stock: 15, weightKg: 0.162 },
+      ],
+    },
+    {
+      title: "Samsung Galaxy S26 Ultra",
+      slug: "samsung-galaxy-s26-ultra",
+      description: "The most powerful Galaxy ever. Snapdragon 8 Elite, 200MP quad camera, integrated S Pen.",
+      brandId: B.samsung, categoryId: SC.smartphones, isFeatured: true,
+      attributes: { ram: "12GB", sim: "Dual SIM 5G", camera: "200MP", screenSize: '6.9"', os: "Android 16" },
+      tags: ["new", "flagship", "s-pen"],
+      images: [
+        "/products/samsung-s26/sm-s948_galaxys26ultra_front_black_251120_1.jpg",
+        "/products/samsung-s26/sm-s948_galaxys26ultra_front_skyblue_251114.jpg",
+        "/products/samsung-s26/S26_Ultra_Purple.jpg",
+        "/products/samsung-s26/sm-s948_galaxys26ultra_front_white_251120.jpg",
+      ],
+      variants: [
+        { sku: "S26U-256-BLACK",   storage: "256GB", color: "Phantom Black",  priceAed: 4799, compareAtAed: 5299, stock: 20, weightKg: 0.218, isDefault: true },
+        { sku: "S26U-512-BLUE",    storage: "512GB", color: "Sky Blue",       priceAed: 5299, stock: 12, weightKg: 0.218 },
+        { sku: "S26U-1TB-VIOLET",  storage: "1TB",   color: "Cobalt Violet",  priceAed: 5999, stock: 8, weightKg: 0.218 },
       ],
     },
     {
       title: "Apple iPhone 17 Pro",
       slug: "apple-iphone-17-pro",
-      description: "Titanium. A19 Pro chip. Ultra-resolution Camera system. All-new design.",
+      description: "Titanium. A19 Pro chip. Ultra-resolution Camera system with all-new Tetraprism telephoto.",
       brandId: B.apple, categoryId: SC.smartphones, isFeatured: true,
       attributes: { ram: "12GB", sim: "Nano-SIM + eSIM", camera: "48MP", screenSize: '6.3"', os: "iOS 19" },
       tags: ["new", "flagship", "authorized"],
-      images: [PLACEHOLDER("iPhone 17 Pro")],
+      images: [
+        "/products/iphone-17/iphone_17_pro_listing.png",
+        "/products/iphone-17-pro.jpg",
+      ],
       variants: [
         { sku: "IP17P-256-NT",  storage: "256GB", color: "Natural Titanium", priceAed: 4699, stock: 30, weightKg: 0.187, isDefault: true },
         { sku: "IP17P-512-BT",  storage: "512GB", color: "Black Titanium",   priceAed: 5299, stock: 18, weightKg: 0.187 },
@@ -84,13 +131,96 @@ async function main() {
       ],
     },
     {
+      title: "Apple iPhone 17 Pro Max",
+      slug: "apple-iphone-17-pro-max",
+      description: "The biggest, most powerful iPhone. A19 Pro chip, 6.9\" Super Retina XDR, 5x optical zoom.",
+      brandId: B.apple, categoryId: SC.smartphones, isFeatured: true,
+      attributes: { ram: "12GB", sim: "Nano-SIM + eSIM", camera: "48MP", screenSize: '6.9"', os: "iOS 19" },
+      tags: ["new", "flagship", "authorized"],
+      images: [
+        "/products/iphone-17/iphone_17_pro_max_listing.png",
+      ],
+      variants: [
+        { sku: "IP17PM-256-DT",  storage: "256GB", color: "Desert Titanium", priceAed: 5499, stock: 25, weightKg: 0.218, isDefault: true },
+        { sku: "IP17PM-512-NT",  storage: "512GB", color: "Natural Titanium", priceAed: 6199, stock: 15, weightKg: 0.218 },
+        { sku: "IP17PM-1TB-BT",  storage: "1TB",   color: "Black Titanium",   priceAed: 7299, stock: 8,  weightKg: 0.218 },
+      ],
+    },
+    {
+      title: "Apple iPhone 17",
+      slug: "apple-iphone-17",
+      description: "A18 chip. Advanced dual-camera system. Ceramic Shield front. Aluminum design.",
+      brandId: B.apple, categoryId: SC.smartphones,
+      attributes: { ram: "8GB", sim: "Nano-SIM + eSIM", camera: "48MP", screenSize: '6.1"', os: "iOS 19" },
+      tags: ["new", "authorized"],
+      images: [
+        "/products/iphone-17/iphone_17_listing.png",
+      ],
+      variants: [
+        { sku: "IP17-128-PINK",  storage: "128GB", color: "Pink",  priceAed: 3199, stock: 40, weightKg: 0.170, isDefault: true },
+        { sku: "IP17-256-BLACK", storage: "256GB", color: "Black", priceAed: 3699, stock: 30, weightKg: 0.170 },
+        { sku: "IP17-512-WHITE", storage: "512GB", color: "White", priceAed: 4199, stock: 15, weightKg: 0.170 },
+      ],
+    },
+    {
+      title: "Apple iPhone 17 Air",
+      slug: "apple-iphone-17-air",
+      description: "The thinnest iPhone ever. 6.6mm profile, A18 chip, 48MP camera, all-day battery.",
+      brandId: B.apple, categoryId: SC.smartphones, isFeatured: true,
+      attributes: { ram: "8GB", sim: "Nano-SIM + eSIM", camera: "48MP", screenSize: '6.6"', os: "iOS 19" },
+      tags: ["new", "ultra-thin"],
+      images: [
+        "/products/iphone-17/iphone_17_air_listing.png",
+      ],
+      variants: [
+        { sku: "IP17A-256-SAND",  storage: "256GB", color: "Desert Sand", priceAed: 3999, stock: 25, weightKg: 0.145, isDefault: true },
+        { sku: "IP17A-512-WHITE", storage: "512GB", color: "Starlight",   priceAed: 4499, stock: 18, weightKg: 0.145 },
+      ],
+    },
+    {
+      title: "Samsung Galaxy Z Fold 7",
+      slug: "samsung-galaxy-z-fold7",
+      description: "Ultra-thin foldable with Snapdragon 8 Elite, 200MP camera and Galaxy AI features.",
+      brandId: B.samsung, categoryId: SC.foldables, isFeatured: true,
+      attributes: { ram: "12GB", sim: "Dual SIM 5G", camera: "200MP", screenSize: '7.9"', os: "Android 16" },
+      tags: ["new", "foldable", "flagship"],
+      images: [
+        "/products/samsung-fold7/smf966bzkemeawpr5_1_.jpg",
+        "/products/samsung-fold7/smf966bzkdmeaw-pr5_1_.jpg",
+        "/products/samsung-fold7/smf966bzsdmeaw-pr5_1_.jpg",
+        "/products/samsung-fold7/smf966bdbdmeaw-pr5_6__1.jpg",
+      ],
+      variants: [
+        { sku: "ZF7-256-BLACK",  storage: "256GB", color: "Phantom Black",  priceAed: 6999, compareAtAed: 7599, stock: 15, weightKg: 0.239, isDefault: true },
+        { sku: "ZF7-512-SILVER", storage: "512GB", color: "Icy Silver",     priceAed: 7799, stock: 8, weightKg: 0.239 },
+      ],
+    },
+    {
+      title: "Samsung Galaxy Z Flip 7",
+      slug: "samsung-galaxy-z-flip7",
+      description: "Compact flip foldable with FlexWindow AI, 50MP camera, Snapdragon 8 Elite.",
+      brandId: B.samsung, categoryId: SC.foldables,
+      attributes: { ram: "12GB", sim: "Dual SIM 5G", camera: "50MP", screenSize: '6.7"', os: "Android 16" },
+      tags: ["new", "foldable"],
+      images: [
+        "/products/samsung-fold7/smf761bzwemeaw-pr5_eros_jul2025_1_.jpg",
+        "/products/samsung-fold7/smf761bzkemeaw-pr5-eros_july_2025_9_.jpg",
+        "/products/samsung-fold7/smf766bdbemeawpr5_1_.jpg",
+      ],
+      variants: [
+        { sku: "ZFL7-256-MINT",  storage: "256GB", color: "Mint",  priceAed: 3999, compareAtAed: 4299, stock: 20, weightKg: 0.188, isDefault: true },
+        { sku: "ZFL7-256-BLACK", storage: "256GB", color: "Black", priceAed: 3999, stock: 15, weightKg: 0.188 },
+        { sku: "ZFL7-256-BLUE",  storage: "256GB", color: "Blue",  priceAed: 3999, stock: 12, weightKg: 0.188 },
+      ],
+    },
+    {
       title: "Nothing Phone 3a Pro",
       slug: "nothing-phone-3a-pro",
       description: "Glyph Interface 3.0, triple camera, 5000mAh battery. Design that speaks.",
       brandId: B.nothing, categoryId: SC.smartphones,
-      attributes: { ram: "12GB", sim: "Dual SIM 5G", camera: "50MP", screenSize: '6.7"' },
+      attributes: { ram: "12GB", sim: "Dual SIM 5G", camera: "50MP", screenSize: '6.7"', os: "Android 15" },
       tags: ["new"],
-      images: [PLACEHOLDER("Nothing 3a Pro")],
+      images: ["/products/nothing-phone-3a-pro.jpg", "/products/nothing-phone-3a-pro.png"],
       variants: [
         { sku: "NP3A-256-GRAY", storage: "256GB", color: "Dark Gray", priceAed: 1749, compareAtAed: 1849, stock: 20, weightKg: 0.201, isDefault: true },
       ],
@@ -99,10 +229,10 @@ async function main() {
       title: "Huawei Mate X6 4G Foldable",
       slug: "huawei-mate-x6",
       description: "Ultra-slim foldable with Kirin 9020 and 50MP Leica triple camera.",
-      brandId: B.huawei, categoryId: SC.smartphones,
-      attributes: { ram: "12GB", sim: "Nano SIM", camera: "50MP", screenSize: '7.93"' },
+      brandId: B.huawei, categoryId: SC.foldables,
+      attributes: { ram: "12GB", sim: "Nano SIM", camera: "50MP", screenSize: '7.93"', os: "HarmonyOS 4" },
       tags: ["foldable"],
-      images: [PLACEHOLDER("Mate X6")],
+      images: ["/products/huawei-mate-x6.jpg"],
       variants: [
         { sku: "MX6-512-RED",   storage: "512GB", color: "Nebula Red",    priceAed: 1599, compareAtAed: 1699, stock: 10, weightKg: 0.239, isDefault: true },
         { sku: "MX6-512-BLACK", storage: "512GB", color: "Phantom Black", priceAed: 1599, stock: 8, weightKg: 0.239 },
@@ -113,32 +243,32 @@ async function main() {
       slug: "xiaomi-15-ultra",
       description: "Leica Summilux optics, Snapdragon 8 Elite, 6000mAh battery with 90W HyperCharge.",
       brandId: B.xiaomi, categoryId: SC.smartphones, isFeatured: true,
-      attributes: { ram: "16GB", sim: "Dual SIM 5G", camera: "200MP", screenSize: '6.73"' },
+      attributes: { ram: "16GB", sim: "Dual SIM 5G", camera: "200MP", screenSize: '6.73"', os: "Android 15" },
       tags: ["flagship", "camera"],
-      images: [PLACEHOLDER("Xiaomi 15 Ultra")],
+      images: ["/products/xiaomi-15-ultra.jpg"],
       variants: [
         { sku: "MI15U-512-WHITE", storage: "512GB", color: "White", priceAed: 3299, compareAtAed: 3799, stock: 15, weightKg: 0.224, isDefault: true },
         { sku: "MI15U-1TB-BLACK", storage: "1TB",   color: "Black", priceAed: 3799, stock: 8, weightKg: 0.224 },
       ],
     },
 
-    // ---- Tablets ----
+    // ── Tablets ───────────────────────────────────────────────────────────────
     {
-      title: "Apple iPad Pro 13\" M4",
+      title: 'Apple iPad Pro 13" M4',
       slug: "apple-ipad-pro-13-m4",
       description: "Impossibly thin. Remarkably powerful. M4 chip with Apple Intelligence.",
       brandId: B.apple, categoryId: SC.tablets, isFeatured: true,
       attributes: { storage: "256GB", screenSize: '13"', os: "iPadOS 18" },
       tags: ["new", "flagship"],
-      images: [PLACEHOLDER("iPad Pro M4")],
+      images: ["https://placehold.co/600x600/EDE8F5/3D52A0?text=iPad+Pro+M4"],
       variants: [
-        { sku: "IPADP13-256-SL", storage: "256GB", color: "Silver", priceAed: 5999, stock: 12, weightKg: 0.579, isDefault: true },
-        { sku: "IPADP13-512-SL", storage: "512GB", color: "Silver", priceAed: 6999, stock: 8, weightKg: 0.579 },
+        { sku: "IPADP13-256-SL", storage: "256GB", color: "Silver",      priceAed: 5999, stock: 12, weightKg: 0.579, isDefault: true },
+        { sku: "IPADP13-512-SL", storage: "512GB", color: "Silver",      priceAed: 6999, stock: 8, weightKg: 0.579 },
         { sku: "IPADP13-1TB-BK", storage: "1TB",   color: "Space Black", priceAed: 8999, stock: 4, weightKg: 0.579 },
       ],
     },
 
-    // ---- Smart Watches ----
+    // ── Smart Watches ─────────────────────────────────────────────────────────
     {
       title: "Apple Watch Ultra 2",
       slug: "apple-watch-ultra-2",
@@ -146,7 +276,7 @@ async function main() {
       brandId: B.apple, categoryId: SC["smart-watches"], isFeatured: true,
       attributes: { screenSize: "49mm", material: "Titanium" },
       tags: ["flagship"],
-      images: [PLACEHOLDER("Watch Ultra 2")],
+      images: ["/products/apple-watch-ultra-2.jpg"],
       variants: [
         { sku: "AWU2-49-NT", color: "Natural Titanium", priceAed: 3799, stock: 20, weightKg: 0.061, isDefault: true },
         { sku: "AWU2-49-BT", color: "Black Titanium",   priceAed: 3799, stock: 15, weightKg: 0.061 },
@@ -159,7 +289,7 @@ async function main() {
       brandId: B.samsung, categoryId: SC["smart-watches"],
       attributes: { screenSize: "44mm" },
       tags: ["bestseller"],
-      images: [PLACEHOLDER("Galaxy Watch 7")],
+      images: ["/products/samsung-galaxy-watch7.jpg"],
       variants: [
         { sku: "GW7-44-SILVER", color: "Titanium Silver", priceAed: 1299, compareAtAed: 1499, stock: 25, weightKg: 0.033, isDefault: true },
         { sku: "GW7-44-CREAM",  color: "Cream",           priceAed: 1299, compareAtAed: 1499, stock: 18, weightKg: 0.033 },
@@ -171,13 +301,14 @@ async function main() {
       description: "Titanium case, 14-day battery, ECG monitoring, AMOLED display.",
       brandId: B.huawei, categoryId: SC["smart-watches"],
       attributes: { screenSize: "46mm", material: "Titanium" },
-      images: [PLACEHOLDER("GT 5 Pro")],
+      tags: [],
+      images: ["https://placehold.co/600x600/EDE8F5/3D52A0?text=GT+5+Pro"],
       variants: [
         { sku: "GT5P-46-TI", color: "Titanium Gray", priceAed: 1199, compareAtAed: 1399, stock: 20, weightKg: 0.054, isDefault: true },
       ],
     },
 
-    // ---- Laptops ----
+    // ── Laptops ───────────────────────────────────────────────────────────────
     {
       title: 'Apple MacBook Pro 14" M4 Pro',
       slug: "macbook-pro-14-m4-pro",
@@ -185,7 +316,7 @@ async function main() {
       brandId: B.apple, categoryId: SC.laptops, isFeatured: true,
       attributes: { ram: "24GB", storage: "512GB", screenSize: '14"', os: "macOS Sequoia" },
       tags: ["flagship", "new"],
-      images: [PLACEHOLDER("MacBook Pro M4")],
+      images: ["/products/macbook-pro-14-m4.jpg"],
       variants: [
         { sku: "MBP14-24-512-SB", ram: "24GB", storage: "512GB", color: "Space Black", priceAed: 8499, stock: 10, weightKg: 1.555, isDefault: true },
         { sku: "MBP14-24-1T-SL",  ram: "24GB", storage: "1TB",   color: "Silver",      priceAed: 9999, stock: 6, weightKg: 1.555 },
@@ -198,7 +329,7 @@ async function main() {
       brandId: B.dell, categoryId: SC.laptops,
       attributes: { ram: "32GB", storage: "1TB", screenSize: '15.6"', os: "Windows 11" },
       tags: ["premium"],
-      images: [PLACEHOLDER("Dell XPS 15")],
+      images: ["/products/dell-xps-15.png"],
       variants: [
         { sku: "XPS15-32-1T-SL", ram: "32GB", storage: "1TB", color: "Platinum Silver", priceAed: 7299, compareAtAed: 8499, stock: 8, weightKg: 1.86, isDefault: true },
       ],
@@ -210,7 +341,7 @@ async function main() {
       brandId: B.asus, categoryId: SC.laptops,
       attributes: { ram: "32GB", storage: "1TB", screenSize: '16"', gpu: "RTX 4080", os: "Windows 11" },
       tags: ["gaming"],
-      images: [PLACEHOLDER("ROG Zephyrus G16")],
+      images: ["/products/asus-rog-zephyrus-g16.jpg"],
       variants: [
         { sku: "ROGZ16-32-1T-BK", ram: "32GB", storage: "1TB", color: "Eclipse Gray", priceAed: 9999, compareAtAed: 11999, stock: 5, weightKg: 1.85, isDefault: true },
       ],
@@ -222,7 +353,7 @@ async function main() {
       brandId: B.microsoft, categoryId: SC.laptops,
       attributes: { ram: "16GB", storage: "512GB", screenSize: '13.8"', os: "Windows 11" },
       tags: ["new", "copilot"],
-      images: [PLACEHOLDER("Surface Laptop 7")],
+      images: ["/products/microsoft-surface-laptop-7.png"],
       variants: [
         { sku: "SL7-16-512-PLAT", ram: "16GB", storage: "512GB", color: "Platinum", priceAed: 5299, stock: 12, weightKg: 1.34, isDefault: true },
         { sku: "SL7-32-1T-PLAT",  ram: "32GB", storage: "1TB",   color: "Platinum", priceAed: 6999, stock: 6, weightKg: 1.34 },
@@ -235,7 +366,7 @@ async function main() {
       brandId: B.hp, categoryId: SC.laptops,
       attributes: { ram: "16GB", storage: "1TB", screenSize: '14"', os: "Windows 11" },
       tags: ["premium", "2-in-1"],
-      images: [PLACEHOLDER("Spectre x360")],
+      images: ["/products/hp-spectre-x360.png"],
       variants: [
         { sku: "SPX14-16-1T-NIGHTFALL", ram: "16GB", storage: "1TB", color: "Nightfall Black", priceAed: 6499, compareAtAed: 7299, stock: 8, weightKg: 1.41, isDefault: true },
       ],
@@ -245,7 +376,20 @@ async function main() {
   for (const p of products) {
     const { images, variants, ...productData } = p;
     const existing = await db.product.findUnique({ where: { slug: productData.slug } });
-    if (existing) { console.log(`  skip: ${productData.slug}`); continue; }
+
+    if (existing) {
+      // Update images if they're still placeholders
+      const existingImages = await db.productImage.findMany({ where: { productId: existing.id } });
+      const hasPlaceholder = existingImages.some(i => i.url.includes("placehold.co"));
+      if (hasPlaceholder) {
+        await db.productImage.deleteMany({ where: { productId: existing.id } });
+        await db.productImage.createMany({ data: images.map((url, i) => ({ productId: existing.id, url, sortOrder: i })) });
+        console.log(`  ↻ updated images: ${productData.slug}`);
+      } else {
+        console.log(`  skip: ${productData.slug}`);
+      }
+      continue;
+    }
 
     const created = await db.product.create({
       data: {

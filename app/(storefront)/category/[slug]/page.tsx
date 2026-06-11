@@ -1,27 +1,53 @@
 import ProductCard, { type ProductCardData } from "@/components/storefront/ProductCard";
+import { db } from "@/lib/db";
 import { ChevronRight, SlidersHorizontal } from "lucide-react";
 import Link from "next/link";
-
-const DEMO: ProductCardData[] = Array.from({ length: 12 }, (_, i) => ({
-  id: String(i + 1),
-  title: `Demo Product ${i + 1} – High Performance Model`,
-  slug: `demo-product-${i + 1}`,
-  priceAed: 999 + i * 200,
-  compareAtAed: i % 3 === 0 ? 1299 + i * 200 : undefined,
-  imageUrl: `https://placehold.co/400x400/EDE8F5/3D52A0?text=Product+${i + 1}`,
-  brand: ["Apple", "Samsung", "Huawei", "Dell"][i % 4],
-}));
+import { notFound } from "next/navigation";
 
 const FILTERS = [
-  { label: "Brand", options: ["Apple", "Samsung", "Huawei", "Dell", "ASUS", "Sony"] },
+  { label: "Brand", options: ["Apple", "Samsung", "Huawei", "Dell", "ASUS", "Sony", "Xiaomi", "Nothing"] },
   { label: "Price", options: ["Under AED 500", "AED 500–1,000", "AED 1,000–3,000", "Above AED 3,000"] },
   { label: "RAM", options: ["4GB", "6GB", "8GB", "12GB", "16GB", "32GB"] },
   { label: "Storage", options: ["64GB", "128GB", "256GB", "512GB", "1TB"] },
-  { label: "Color", options: ["Black", "White", "Silver", "Gold", "Blue"] },
+  { label: "Color", options: ["Black", "White", "Silver", "Gold", "Blue", "Titanium"] },
 ];
 
-export default function CategoryPage({ params }: { params: { slug: string } }) {
-  const title = params.slug.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+
+  const category = await db.category.findUnique({
+    where: { slug },
+    include: {
+      children: { select: { id: true } },
+    },
+  });
+
+  if (!category) notFound();
+
+  const categoryIds = [category.id, ...category.children.map(c => c.id)];
+
+  const products = await db.product.findMany({
+    where: { categoryId: { in: categoryIds }, isActive: true },
+    include: {
+      brand: { select: { name: true } },
+      images: { orderBy: { sortOrder: "asc" }, take: 1 },
+      variants: { where: { isDefault: true }, take: 1 },
+    },
+    orderBy: [{ isFeatured: "desc" }, { createdAt: "desc" }],
+  });
+
+  const cards: ProductCardData[] = products.map(p => ({
+    id: p.id,
+    title: p.title,
+    slug: p.slug,
+    priceAed: Number(p.variants[0]?.priceAed ?? 0),
+    compareAtAed: p.variants[0]?.compareAtAed ? Number(p.variants[0].compareAtAed) : undefined,
+    imageUrl: p.images[0]?.url ?? `https://placehold.co/400x400/EDE8F5/3D52A0?text=${encodeURIComponent(p.title)}`,
+    brand: p.brand.name,
+    badge: p.tags.includes("new") ? "New" : p.tags.includes("bestseller") ? "Bestseller" : undefined,
+  }));
+
+  const title = category.name;
 
   return (
     <div className="mx-auto max-w-[1280px] px-4 py-6">
@@ -33,7 +59,7 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
       </nav>
 
       <div className="flex gap-6">
-        {/* Sidebar filters — hidden on mobile */}
+        {/* Sidebar filters */}
         <aside className="hidden md:block w-52 shrink-0">
           <div className="sticky top-24 space-y-5">
             <p className="font-bold text-sm text-[#3D52A0] flex items-center gap-2">
@@ -62,7 +88,7 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
           <div className="flex items-center justify-between mb-4">
             <h1 className="text-lg font-bold text-[#3D52A0]">{title}</h1>
             <div className="flex items-center gap-3">
-              <span className="text-xs text-gray-500">{DEMO.length} products</span>
+              <span className="text-xs text-gray-500">{cards.length} products</span>
               <select className="text-xs border border-gray-200 rounded-lg px-2 py-1.5 outline-none focus:border-[#3D52A0]">
                 <option>Default</option>
                 <option>Price: Low to High</option>
@@ -71,18 +97,26 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
               </select>
             </div>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
-            {DEMO.map(p => <ProductCard key={p.id} product={p} />)}
-          </div>
 
-          {/* Pagination */}
-          <div className="flex justify-center gap-2 mt-8">
-            {[1, 2, 3, 4, 5].map(n => (
-              <button key={n} className={`w-8 h-8 rounded-lg text-xs font-semibold ${n === 1 ? "bg-[#3D52A0] text-white" : "bg-[#EDE8F5] text-[#3D52A0] hover:bg-[#ADBBDA]"}`}>
-                {n}
-              </button>
-            ))}
-          </div>
+          {cards.length === 0 ? (
+            <div className="text-center py-24 text-gray-400">
+              <p className="text-sm">No products found in this category yet.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+              {cards.map(p => <ProductCard key={p.id} product={p} />)}
+            </div>
+          )}
+
+          {cards.length > 12 && (
+            <div className="flex justify-center gap-2 mt-8">
+              {[1, 2, 3].map(n => (
+                <button key={n} className={`w-8 h-8 rounded-lg text-xs font-semibold ${n === 1 ? "bg-[#3D52A0] text-white" : "bg-[#EDE8F5] text-[#3D52A0] hover:bg-[#ADBBDA]"}`}>
+                  {n}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
