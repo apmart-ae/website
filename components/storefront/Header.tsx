@@ -103,9 +103,9 @@ export default function Header() {
 
                 {/* Mega menu */}
                 {cat.sub.length > 0 && (
-                  <div className="absolute left-0 top-full hidden group-hover:flex bg-white shadow-xl rounded-b-xl border border-gray-100 min-w-[480px] z-50 p-5 gap-6">
+                  <div className="absolute left-0 top-full hidden group-hover:flex bg-white shadow-xl rounded-b-xl border border-gray-100 min-w-[640px] z-50 p-5 gap-6">
                     {cat.sub.map((sub) => (
-                      <div key={sub.slug} className="min-w-[140px]">
+                      <div key={sub.slug} className="min-w-[150px]">
                         <Link
                           href={`/category/${sub.slug}`}
                           className="block text-xs font-semibold text-[#3D52A0] uppercase tracking-wide mb-2 hover:underline"

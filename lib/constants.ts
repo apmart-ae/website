@@ -9,18 +9,45 @@ export const NAV_CATEGORIES = [
     label: "Mobiles & Tablets",
     slug: "mobiles-tablets",
     sub: [
-      { label: "Smartphones", slug: "smartphones" },
-      { label: "Tablets", slug: "tablets" },
-      { label: "Trending Devices", slug: "trending-devices" },
+      {
+        label: "Smart Phones",
+        slug: "smartphones",
+        items: [
+          { label: "iPhone",      href: "/search?q=iphone" },
+          { label: "Android",     href: "/search?q=android" },
+          { label: "HarmonyOS",   href: "/search?q=harmonyos" },
+        ],
+      },
+      {
+        label: "Tablets",
+        slug: "tablets",
+        items: [
+          { label: "iPads",           href: "/search?q=ipad" },
+          { label: "Android",         href: "/search?q=android+tablet" },
+          { label: "Huawei Matepad",  href: "/search?q=matepad" },
+        ],
+      },
+      {
+        label: "Trending Devices",
+        slug: "trending-devices",
+        items: [
+          { label: "iPhone 17 Series",                   href: "/search?q=iphone+17" },
+          { label: "Samsung Galaxy Fold7 & Flip7 Series", href: "/search?q=galaxy+fold7" },
+          { label: "Samsung Galaxy S26 Series",          href: "/search?q=galaxy+s26" },
+          { label: "Samsung Galaxy S25 Series",          href: "/search?q=galaxy+s25" },
+          { label: "Samsung Galaxy A Series",            href: "/search?q=galaxy+a+series" },
+        ],
+      },
       {
         label: "Accessories",
         slug: "mobile-accessories",
         items: [
-          { label: "Cases",              href: "/search?q=cases" },
-          { label: "Screen Guard",       href: "/search?q=screen+guard" },
-          { label: "Battery & Charger",  href: "/search?q=charger" },
-          { label: "Power Banks",        href: "/search?q=power+bank" },
-          { label: "Headphones",         href: "/search?q=earbuds" },
+          { label: "Cases & Pouches",  href: "/search?q=cases" },
+          { label: "Screen Guard",     href: "/search?q=screen+guard" },
+          { label: "Battery & Charger", href: "/search?q=charger" },
+          { label: "Power Banks",      href: "/search?q=power+bank" },
+          { label: "Adapter",          href: "/search?q=adapter" },
+          { label: "Headphones",       href: "/search?q=headphones" },
         ],
       },
     ],
